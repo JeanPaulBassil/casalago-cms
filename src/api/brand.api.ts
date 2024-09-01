@@ -1,47 +1,43 @@
+import { Brand, CreateBrand } from './models/Brand'
 import { Tokens } from './models/Tokens'
 import { CreateUser, User } from './models/User'
 import { ApiResponse } from './utils'
 import { AbstractApi, ApiRequestParams } from './utils/AbstractApi'
 
-export class UserApi extends AbstractApi<User> {
-  readonly path = 'users'
+export class BrandApi extends AbstractApi<Brand> {
+  readonly path = 'brands'
   constructor() {
-    super('users')
+    super('brands')
   }
 
-  async create(user: CreateUser): Promise<ApiResponse<User>> {
+  async create(brand: CreateBrand): Promise<ApiResponse<Brand>> {
     const response = this.doFetch({
       requestOptions: {
         method: 'POST',
-        body: JSON.stringify(user),
+        body: JSON.stringify(brand),
       },
-      pathExtension: 'create',
-    }) as Promise<ApiResponse<User>>
-
+    }) as Promise<ApiResponse<Brand>>
     return response
   }
 
-  public async getUsers(params: ApiRequestParams): Promise<ApiResponse<User[]>> {
-    console.log('params', params)
+  public async getBrands(params: ApiRequestParams): Promise<ApiResponse<Brand[]>> {
     const response = (await this.doFetch({
       queries: params.queries,
       requestOptions: {
         method: 'GET',
       },
-    })) as ApiResponse<User[]>
-
+    })) as ApiResponse<Brand[]>
 
     return response
   }
 
-  public async deleteUser(id: string): Promise<ApiResponse<User>> {
+  public async delete(id: string): Promise<ApiResponse<Brand>> {
     const response = (await this.doFetch({
       requestOptions: {
         method: 'DELETE',
       },
       pathExtension: id,
-    })) as ApiResponse<User>
-
+    })) as ApiResponse<Brand>
     return response
   }
 }

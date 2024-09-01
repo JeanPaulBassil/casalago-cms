@@ -1,11 +1,11 @@
-import { User } from '@/api/models/User'
+import { CreateUser } from '@/api/models/User'
 import { UserApi } from '@/api/user.api'
 import { useToast } from '@/app/contexts/ToastContext'
 import { joiResolver } from '@hookform/resolvers/joi'
 import { Button } from '@nextui-org/button'
 import { Input } from '@nextui-org/input'
 import { Modal, ModalBody, ModalContent, ModalFooter } from '@nextui-org/modal'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Joi from 'joi'
 import { Eye, EyeOff, Icon, Lock, Plus, X } from 'lucide-react'
 import React, { useState } from 'react'
@@ -14,6 +14,9 @@ import { useForm } from 'react-hook-form'
 type Props = {
   isOpen: boolean
   onClose: () => void
+  userQuery: {
+    username: string
+  }
 }
 
 const userSchema = Joi.object({
@@ -21,26 +24,27 @@ const userSchema = Joi.object({
   password: Joi.string().required(),
 })
 
-const AddUserModal = ({ isOpen, onClose }: Props) => {
+const AddUserModal = ({ isOpen, onClose, userQuery }: Props) => {
   const [isVisible, setIsVisible] = useState(false)
   const toggleVisibility = () => setIsVisible(!isVisible)
   const toast = useToast()
+  const queryClient = useQueryClient()
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<User>({
+  } = useForm<CreateUser>({
     resolver: joiResolver(userSchema),
   })
 
-  const onSubmit = (data: User) => {
+  const onSubmit = (data: CreateUser) => {
     createUser(data)
   }
 
   const { mutateAsync: createUser } = useMutation({
-    mutationFn: (data: User) => {
+    mutationFn: (data: CreateUser) => {
       const userApi = new UserApi()
       return userApi.create(data)
     },
@@ -51,6 +55,7 @@ const AddUserModal = ({ isOpen, onClose }: Props) => {
       toast.error(error.message)
     },
     onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['users', userQuery] })
       reset()
       onClose()
     },

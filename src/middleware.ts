@@ -12,8 +12,8 @@ export const refreshTokensIfPossible = async (refreshToken: string) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
+        Authorization: `Bearer ${refreshToken}`,
       },
-      body: JSON.stringify({ refreshToken: refreshToken }),
       cache: 'no-store',
     })
     const body = await response.json()
