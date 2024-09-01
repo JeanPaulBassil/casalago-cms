@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { NextUIProvider } from '@nextui-org/system'
-import { Toaster } from 'react-hot-toast'
 import ReactQueryClientProvider from '@/providers/ReactQueryProvider'
-import Image from 'next/image'
+import LayoutWrapper from './_components/Notifications'
+import { ToastProvider } from '@/providers/ToastProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,10 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReactQueryClientProvider>
           <NextUIProvider>
-            <div className="h-screen w-full ">
-              {children}
-            </div>
-            <Toaster position="top-right" />
+            <LayoutWrapper>
+              <ToastProvider>{children}</ToastProvider>
+            </LayoutWrapper>
           </NextUIProvider>
         </ReactQueryClientProvider>
       </body>
