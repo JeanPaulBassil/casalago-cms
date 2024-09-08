@@ -7,9 +7,10 @@ import LayoutWrapper from './_components/Notifications'
 import { ToastProvider } from '@/providers/ToastProvider'
 import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({ subsets: ['latin'] })
+
 export const metadata: Metadata = {
-  title: 'Al-Mouhawess Woods',
-  description: 'Discover the finest quality wood products in Lebanon',
+  title: 'Casalago CMS',
+  description: 'Manage your Casalago website content',
 }
 
 export default function RootLayout({
