@@ -4,7 +4,7 @@ import { ApiResponse, ServerError, ResponseError } from '.'
 export const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3200/api/'
 
 export interface ApiRequestParams {
-  queries?: Record<string, string>
+  queries?: Record<string, string | string[]>
   requestOptions?: RequestInit
   pathExtension?: string
   file?: boolean
@@ -29,7 +29,7 @@ export abstract class AbstractApi<T> {
     }
 
     if (requestParams && requestParams.queries) {
-      const query = new URLSearchParams(requestParams.queries)
+      const query = new URLSearchParams(requestParams.queries as Record<string, string>)
       query.toString() && (url += `?${query.toString()}`)
     }
 

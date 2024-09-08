@@ -9,7 +9,6 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import {Listbox, Tooltip, ListboxItem, ListboxSection} from "@nextui-org/react";
-import {Icon} from "@iconify/react";
 import { cn } from "@/lib/utils";
 
 export enum SidebarItemType {

@@ -1,6 +1,8 @@
 import { BrandApi } from '@/api/brand.api'
 import { FileUploadApi } from '@/api/file-upload.api'
 import { CreateBrand } from '@/api/models/Brand'
+import { FileUpload } from '@/api/models/FileUpload'
+import { ApiResponse } from '@/api/utils'
 import { useToast } from '@/app/contexts/ToastContext'
 import { joiResolver } from '@hookform/resolvers/joi'
 import { Avatar, AvatarProps } from '@nextui-org/avatar'
@@ -59,7 +61,7 @@ const AddBrandModal = ({ isOpen, onClose, queries }: Props) => {
       const brandApi = new BrandApi()
 
       if (file) {
-        const uploadResponse = await fileUploadApi.uploadSingle(file)
+        const uploadResponse = await fileUploadApi.uploadSingle(file) as ApiResponse<FileUpload>
         data.image = uploadResponse.payload.image_url
       }
 

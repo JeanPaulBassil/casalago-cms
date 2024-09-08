@@ -26,12 +26,6 @@ export const sectionItems: SidebarItem[] = [
         title: 'Brands',
       },
       {
-        key: 'categories',
-        href: '/categories',
-          icon: <TableCellsMerge strokeWidth={1} color="#ffffff" />,
-        title: 'Categories',
-      },
-      {
         key: 'users',
         href: '/users',
         icon: <Users strokeWidth={1} color="#ffffff" />,

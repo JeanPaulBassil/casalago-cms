@@ -2,7 +2,7 @@
 
 import type { InputProps } from '@nextui-org/react'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Button, Input, Checkbox, Link, Divider } from '@nextui-org/react'
 import { Icon } from '@iconify/react'
 import { useForm } from 'react-hook-form'
@@ -27,7 +27,7 @@ const loginSchema = Joi.object({
   password: Joi.string().required(),
 })
 
-export default function Component() {
+function LoginComponent() {
   const [isVisible, setIsVisible] = React.useState(false)
 
   const toggleVisibility = () => setIsVisible(!isVisible)
@@ -35,7 +35,6 @@ export default function Component() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const redirectParam = searchParams.get('redirect')
-
 
   const inputClasses: InputProps['classNames'] = {
     inputWrapper:
@@ -55,7 +54,7 @@ export default function Component() {
   const onSubmit = async (data: FormValues) => {
     const authApi = new AuthApi()
     try {
-    const response = await authApi.login(data.username, data.password)
+      const response = await authApi.login(data.username, data.password)
       toast.success('Logged in successfully')
       const { access_token, refresh_token } = response.payload
       saveTokensAction(access_token, refresh_token)
@@ -63,7 +62,6 @@ export default function Component() {
       setTimeout(() => {
         router.replace(redirectParam ?? '/')
       }, 200)
-
     } catch (error) {
       toast.error('Invalid credentials')
     }
@@ -77,7 +75,7 @@ export default function Component() {
           <Input
             classNames={inputClasses}
             label="Email Address"
-            radius='sm'
+            radius="sm"
             placeholder="Enter your email"
             type="text"
             {...register('username')}
@@ -105,7 +103,7 @@ export default function Component() {
               </button>
             }
             label="Password"
-            radius='sm'
+            radius="sm"
             placeholder="Enter your password"
             type={isVisible ? 'text' : 'password'}
             variant="bordered"
@@ -115,11 +113,19 @@ export default function Component() {
             isRequired
             isDisabled={isSubmitting}
           />
-          <Button className={buttonClasses} isLoading={isSubmitting} radius='sm' type="submit">
+          <Button className={buttonClasses} isLoading={isSubmitting} radius="sm" type="submit">
             Log In
           </Button>
         </form>
       </div>
     </div>
+  )
+}
+
+export default function page() {
+  return (
+    <Suspense>
+      <LoginComponent />
+    </Suspense>
   )
 }

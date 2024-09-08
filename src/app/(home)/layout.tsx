@@ -1,20 +1,15 @@
 import type { Metadata } from 'next'
-import AppLayout from '../_components/AppLayout';
-
+import AppLayout from '../_components/AppLayout'
 
 export const metadata: Metadata = {
-  title: 'Products List',
-  description: 'List of products',
+  title: 'Casalago',
+  description: 'Discover the finest quality wood products in Lebanon',
 }
 
-export default function Layout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <AppLayout>
-      {children}
-    </AppLayout>
-  )
+  return <AppLayout>{children}</AppLayout>
 }

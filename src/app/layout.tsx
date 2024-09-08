@@ -5,7 +5,7 @@ import { NextUIProvider } from '@nextui-org/system'
 import ReactQueryClientProvider from '@/providers/ReactQueryProvider'
 import LayoutWrapper from './_components/Notifications'
 import { ToastProvider } from '@/providers/ToastProvider'
-
+import AppLayout from './_components/AppLayout'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

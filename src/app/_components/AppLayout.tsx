@@ -9,6 +9,9 @@ import { sectionItemsWithTeams } from '../types/SidebarItems'
 import Sidebar from './Sidebar'
 import { Home } from 'lucide-react'
 import { SidebarProvider } from '../contexts/SidebarContext'
+import { useRouter } from 'next/navigation'
+import logoutAction from '../actions/logout.action'
+import getAccessTokenVerifiedOrRefreshIfNeeded from '../actions/verify-and-refresh.action'
 
 /**
  *  This example requires installing the `usehooks-ts` package:
@@ -31,6 +34,7 @@ import { SidebarProvider } from '../contexts/SidebarContext'
 export default function Component({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = React.useState(true)
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const router = useRouter()
 
   const isCompact = isCollapsed || isMobile
 
@@ -105,6 +109,10 @@ export default function Component({ children }: { children: React.ReactNode }) {
                   )
                 }
                 variant="light"
+                onClick={async () => {
+                  await logoutAction()
+                  router.push('/login')
+                }}
               >
                 {isCompact ? (
                   <Icon

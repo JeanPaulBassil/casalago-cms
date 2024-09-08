@@ -1,4 +1,4 @@
-import { FileUpload } from './models/FileUpload'
+import { FileUpload, MultipleFileUpload } from './models/FileUpload'
 import { ApiResponse } from './utils'
 import { AbstractApi } from './utils/AbstractApi'
 
@@ -9,7 +9,7 @@ export class FileUploadApi extends AbstractApi<FileUpload> {
     super('file-upload', secure)
   }
 
-  async uploadSingle(file: File): Promise<ApiResponse<FileUpload>> {
+  async uploadSingle(file: File): Promise<ApiResponse<FileUpload | MultipleFileUpload>> {
     const formData = new FormData()
     formData.append('image', file)
     // get boundary from form data
@@ -34,5 +34,20 @@ export class FileUploadApi extends AbstractApi<FileUpload> {
         message: response.payload.message,
       },
     }
+  }
+
+  async uploadMultiple(files: File[]): Promise<ApiResponse<FileUpload | MultipleFileUpload>> {
+    const formData = new FormData()
+    files.forEach((file) => formData.append('images', file))
+    const response: ApiResponse<FileUpload | MultipleFileUpload> = (await this.doFetch({
+      file: true,
+      requestOptions: {
+        method: 'POST',
+        body: formData,
+      },
+      pathExtension: 'multiple',
+    })) as ApiResponse<FileUpload | MultipleFileUpload>
+
+    return response
   }
 }
