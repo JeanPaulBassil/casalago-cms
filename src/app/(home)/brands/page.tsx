@@ -102,7 +102,7 @@ const page = () => {
             setQueries({ name: '' })
           }}
         />
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 overflow-scroll h-[calc(100vh-8rem)]">
           {isLoading ? (
             <div className="flex h-[calc(100vh-8rem)] w-full items-center justify-center">
               <Spinner color="success" />
