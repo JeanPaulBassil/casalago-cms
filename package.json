@@ -35,6 +35,7 @@
     "@types/js-cookie": "^3.0.6",
     "@types/jwt-decode": "^3.1.0",
     "@uidotdev/usehooks": "^2.4.1",
+    "@vercel/speed-insights": "^1.0.12",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "date-fns-tz": "^3.1.3",

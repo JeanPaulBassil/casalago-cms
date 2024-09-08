@@ -5,9 +5,8 @@ import { NextUIProvider } from '@nextui-org/system'
 import ReactQueryClientProvider from '@/providers/ReactQueryProvider'
 import LayoutWrapper from './_components/Notifications'
 import { ToastProvider } from '@/providers/ToastProvider'
-import AppLayout from './_components/AppLayout'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
   title: 'Al-Mouhawess Woods',
   description: 'Discover the finest quality wood products in Lebanon',
@@ -24,7 +23,9 @@ export default function RootLayout({
         <ReactQueryClientProvider>
           <NextUIProvider>
             <LayoutWrapper>
-              <ToastProvider>{children}</ToastProvider>
+              <ToastProvider>{children}
+                <SpeedInsights />
+              </ToastProvider>
             </LayoutWrapper>
           </NextUIProvider>
         </ReactQueryClientProvider>
