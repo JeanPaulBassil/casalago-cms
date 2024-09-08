@@ -57,6 +57,9 @@ const AddProductModal = ({ isOpen, onClose, queries }: Props) => {
     queryKey: ['brands'],
     queryFn: async () => {
       const response = await brandApi.getBrands({ queries: { name: '' } })
+      if (response.payload.length === 0) {
+        setErrorCreate('brandId', { message: 'You need to create a brand first' })
+      }
       return response.payload
     },
   })
@@ -114,6 +117,7 @@ const AddProductModal = ({ isOpen, onClose, queries }: Props) => {
     getValues: getValuesCreate,
     reset: resetCreate,
     formState: { errors: errorsCreate },
+    setError: setErrorCreate,
   } = useForm<Product>({
     resolver: joiResolver(productSchema),
   })
@@ -146,10 +150,6 @@ const AddProductModal = ({ isOpen, onClose, queries }: Props) => {
 
   const addTag = () => {
     const newTag = currentTagName
-
-    console.log('getValuesCreate(tags)', getValuesCreate('tags') || [])
-    console.log('newTag', newTag)
-
     if (newTag) {
       setValueCreate('tags', [...(getValuesCreate('tags') || []), newTag])
       setCurrentTagName('')

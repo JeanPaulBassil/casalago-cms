@@ -47,7 +47,7 @@ export default function BrandCard({
     <Card className="w-full max-w-[520px]">
       <Button
         isIconOnly
-        className="absolute right-2 top-2 z-20"
+        className="absolute left-2 top-2 z-20"
         radius="full"
         size="sm"
         variant="light"
