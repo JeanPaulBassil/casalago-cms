@@ -69,12 +69,8 @@ const ProductViewInfo = ({ product }: ProductViewInfoProps) => {
           <p className="line-clamp-3 text-medium text-default-500">{product?.description}</p>
         </div>
         <div className="mt-4 flex items-center gap-2">
-          <Image
-            src={product?.brand.image}
-            alt={product?.brand.name}
-            className="h-10 w-10 rounded-full object-contain"
-          />
-          <p className="text-medium text-default-500">{product?.brand.name}</p>
+          <p className="text-medium text-default-500">Brand:</p>
+          <p className="text-medium text-default-900">{product?.brand.name}</p>
         </div>
         <div className="mt-4 flex items-center gap-2">
           <p className="text-medium text-default-500">Category:</p>

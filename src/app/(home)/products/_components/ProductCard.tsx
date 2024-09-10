@@ -16,19 +16,6 @@ const ProductCard = ({ product }: { product: Product }) => {
         'relative flex w-full flex-none cursor-pointer flex-col gap-3 rounded-md transition-all duration-300 hover:shadow-md'
       )}
     >
-      <Button
-        isIconOnly
-        className="absolute right-3 top-3 z-20 bg-background/60 backdrop-blur-md backdrop-saturate-150 dark:bg-default-100/50"
-        radius="full"
-        size="sm"
-        variant="faded"
-      >
-        <Image
-          alt={product.brand.name}
-          className="w-10 rounded-full object-contain"
-          src={product.brand.image}
-        />
-      </Button>
       <Image
         isBlurred
         isZoomed

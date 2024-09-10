@@ -61,7 +61,7 @@ const AddBrandModal = ({ isOpen, onClose, queries }: Props) => {
       const brandApi = new BrandApi()
 
       if (file) {
-        const uploadResponse = await fileUploadApi.uploadSingle(file) as ApiResponse<FileUpload>
+        const uploadResponse = (await fileUploadApi.uploadSingle(file)) as ApiResponse<FileUpload>
         data.image = uploadResponse.payload.image_url
       }
 
@@ -159,40 +159,6 @@ const AddBrandModal = ({ isOpen, onClose, queries }: Props) => {
               errorMessage={errors.description?.message}
               isInvalid={!!errors.description}
             />
-            <div
-              className="flex w-full items-center justify-center"
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-            >
-              <label
-                htmlFor="dropzone-file"
-                className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-800"
-              >
-                {file ? (
-                  <Image
-                    src={URL.createObjectURL(file)}
-                    alt="Uploaded Image"
-                    className="h-[200px] w-[200px] rounded-md object-cover"
-                  />
-                ) : (
-                  <div className="flex flex-col items-center justify-center pb-6 pt-5">
-                    <ImageUp className="mb-4 h-8 w-8 text-[#417D7A]" />
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold text-[#417D7A]">Click to upload</span> or drag
-                      and drop
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Image only</p>
-                  </div>
-                )}
-                <input
-                  id="dropzone-file"
-                  type="file"
-                  accept=".png, .jpg, .jpeg"
-                  className="hidden"
-                  onChange={handleFileChange}
-                />
-              </label>
-            </div>
           </ModalBody>
 
           <ModalFooter className="px-0">
