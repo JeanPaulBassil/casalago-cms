@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
   Table,
+  Avatar,
 } from '@nextui-org/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import useOrderedQueries from '@/hooks/useQueries'
@@ -174,7 +175,16 @@ const page = () => {
               <TableBody items={brands}>
                 {(item) => (
                   <TableRow key={item.id}>
-                    <TableCell>{item.name}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Avatar
+                          src={item.image}
+                          alt={item.name}
+                          className="h-8 w-8 rounded-full"
+                        />
+                        {item.name}
+                      </div>
+                    </TableCell>
                     <TableCell>{item.description}</TableCell>
                     <TableCell>
                       <Button
