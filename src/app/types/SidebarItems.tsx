@@ -2,11 +2,7 @@ import { Chip } from '@nextui-org/react'
 import { Icon } from '@iconify/react'
 import { SidebarItem, SidebarItemType } from '../_components/Sidebar'
 import TeamAvatar from '../_components/TeamAvatar'
-import { Apple, Armchair, TableCellsMerge, Users } from 'lucide-react'
-
-/**
- * Please check the https://nextui.org/docs/guide/routing to have a seamless router integration
- */
+import { Apple, Armchair, Box, TableCellsMerge, Users } from 'lucide-react'
 
 export const sectionItems: SidebarItem[] = [
   {
@@ -24,6 +20,12 @@ export const sectionItems: SidebarItem[] = [
         href: '/brands',
         icon: <Apple strokeWidth={1} color="#ffffff" />,
         title: 'Brands',
+      },
+      {
+        key: 'categories',
+        href: '/categories',
+        icon: <Box strokeWidth={1} color="#ffffff" />,
+        title: 'Categories',
       },
       {
         key: 'users',

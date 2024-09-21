@@ -76,7 +76,7 @@ export async function middleware(request: NextRequest) {
 
   console.log('BREAKPOINT 2', path)
   const isSigninPath = path.startsWith('/login')
-  const isEmptyPath = !path.startsWith('/products') && !path.startsWith('/brands') && !path.startsWith('/users')
+  const isEmptyPath = !path.startsWith('/products') && !path.startsWith('/brands') && !path.startsWith('/users') && !path.startsWith('/categories')
 
   if (isSigninPath) {
     console.log('BREAKPOINT 3')
