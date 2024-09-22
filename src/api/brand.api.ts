@@ -1,4 +1,4 @@
-import { Brand, CreateBrand } from './models/Brand'
+import { Brand, CreateBrand, UpdateBrand } from './models/Brand'
 import { Tokens } from './models/Tokens'
 import { CreateUser, User } from './models/User'
 import { ApiResponse } from './utils'
@@ -14,6 +14,16 @@ export class BrandApi extends AbstractApi<Brand> {
     const response = this.doFetch({
       requestOptions: {
         method: 'POST',
+        body: JSON.stringify(brand),
+      },
+    }) as Promise<ApiResponse<Brand>>
+    return response
+  }
+
+  async update(brand: UpdateBrand): Promise<ApiResponse<Brand>> {
+    const response = this.doFetch({
+      requestOptions: {
+        method: 'PUT',
         body: JSON.stringify(brand),
       },
     }) as Promise<ApiResponse<Brand>>

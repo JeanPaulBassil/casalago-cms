@@ -3,7 +3,7 @@ import Widget from '@/app/_components/shared/Widget'
 import { useSidebarContext } from '@/app/contexts/SidebarContext'
 import { Button } from '@nextui-org/button'
 import { useDisclosure } from '@nextui-org/modal'
-import { Plus, Search, Sidebar, Trash } from 'lucide-react'
+import { Link, Plus, Search, Sidebar, Trash } from 'lucide-react'
 import React, { useState } from 'react'
 import {
   Input,
@@ -177,23 +177,30 @@ const page = () => {
                   <TableRow key={item.id}>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <Avatar
-                          src={item.image}
-                          alt={item.name}
-                          className="h-8 w-8 rounded-full"
-                        />
+                        <Avatar src={item.image} alt={item.name} className="h-8 w-8 rounded-full" />
                         {item.name}
                       </div>
                     </TableCell>
                     <TableCell>{item.description}</TableCell>
                     <TableCell>
-                      <Button
-                        onClick={() => onDeleteBrand(item.id)}
-                        isIconOnly
-                        variant="light"
-                        size="sm"
-                        startContent={<Trash color="red" size={16} />}
-                      ></Button>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          onClick={() => {
+                            window.open(item.url, '_blank')
+                          }}
+                          isIconOnly
+                          variant="light"
+                          size="sm"
+                          startContent={<Link color="gray" size={16} />}
+                        />
+                        <Button
+                          onClick={() => onDeleteBrand(item.id)}
+                          isIconOnly
+                          variant="light"
+                          size="sm"
+                          startContent={<Trash color="red" size={16} />}
+                        />
+                      </div>
                     </TableCell>
                   </TableRow>
                 )}

@@ -26,6 +26,7 @@ type Props = {
 const brandSchema = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
+  url: Joi.string().required(),
 })
 
 const AddBrandModal = ({ isOpen, onClose, queries }: Props) => {
@@ -144,6 +145,19 @@ const AddBrandModal = ({ isOpen, onClose, queries }: Props) => {
               {...register('name')}
               errorMessage={errors.name?.message}
               isInvalid={!!errors.name}
+            />
+            <Input
+              label="URL"
+              aria-label="URL"
+              placeholder="Enter the URL"
+              variant="bordered"
+              className="w-full"
+              isRequired
+              isDisabled={isSubmitting}
+              radius="sm"
+              {...register('url')}
+              errorMessage={errors.url?.message}
+              isInvalid={!!errors.url}
             />
             <Textarea
               label="Description"
