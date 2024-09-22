@@ -8,7 +8,6 @@ import { ServerError } from '@/api/utils'
 import { deleteAccessTokenAndRefreshTokenCookies } from '../lib/session'
 
 const logoutAction = async () => {
-  console.log("Logging out")
   const endpoint = baseUrl + 'auth/logout'
   const accessToken = cookies().get(ACCESS_TOKEN_COOKIE_NAME)?.value
 

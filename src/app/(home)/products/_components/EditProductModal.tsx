@@ -66,7 +66,6 @@ const EditProductModal = ({ isOpen, onClose, product, queries }: Props) => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || [])
-    console.log('selectedFiles', selectedFiles)
     if (selectedFiles.length > 0) {
       setError(null)
       setFiles((prevFiles) => [...prevFiles, ...selectedFiles])
@@ -110,7 +109,6 @@ const EditProductModal = ({ isOpen, onClose, product, queries }: Props) => {
 
   const { mutateAsync: editProduct } = useMutation({
     mutationFn: async (data: Product) => {
-      console.log('data', data)
       const imagesToUpload = files.filter((file) => !product?.images?.includes(file.name))
       if (imagesToUpload.length > 0) {
         const images = await fileUploadApi.uploadMultiple(imagesToUpload) as ApiResponse<MultipleFileUpload>

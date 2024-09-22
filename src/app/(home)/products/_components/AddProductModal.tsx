@@ -82,7 +82,6 @@ const AddProductModal = ({ isOpen, onClose, queries }: Props) => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || [])
-    console.log('selectedFiles', selectedFiles)
     if (selectedFiles.length > 0) {
       setError(null)
       setFiles((prevFiles) => [...prevFiles, ...selectedFiles])
@@ -123,9 +122,7 @@ const AddProductModal = ({ isOpen, onClose, queries }: Props) => {
   })
 
   const handleCreate = async (data: Product) => {
-    console.log('Submitted', data)
     const response = await createProduct(data)
-    console.log('response', response)
   }
 
   const {

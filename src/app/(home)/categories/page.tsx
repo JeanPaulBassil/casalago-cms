@@ -103,7 +103,6 @@ const page = () => {
     },
   })
 
-  console.log('categories', categories)
 
   return (
     <div className="h-screen">

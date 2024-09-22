@@ -7,7 +7,6 @@ import { cookies } from 'next/headers'
 import { ACCESS_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_NAME } from '../constants/auth.constants'
 import { setAccessTokenCookie, setRefreshTokenCookie } from '../lib/session'
 
-console.log('process.env.JWT_ACCESS_SECRET', process.env.JWT_ACCESS_SECRET)
 const key = new TextEncoder().encode(process.env.JWT_ACCESS_SECRET)
 
 const getAccessTokenVerifiedOrRefreshIfNeeded = async () => {
@@ -39,8 +38,6 @@ const getAccessTokenVerifiedOrRefreshIfNeeded = async () => {
 
   if (accessToken && refreshToken) {
     console.warn('getAccessTokenVerifiedOrRefreshIfNeeded BREAKPOINT 7')
-    console.log('accessToken', accessToken)
-    console.log('key', key)
     const isAccessTokenValid = await jwtVerify(accessToken, key, { algorithms: ['HS256'] })
     
 

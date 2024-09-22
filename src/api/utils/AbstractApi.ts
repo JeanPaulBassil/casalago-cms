@@ -36,7 +36,6 @@ export abstract class AbstractApi<T> {
     let accessToken: string | undefined
 
     if (this.secure) {
-      console.log('getting access token')
       accessToken = await getAccessTokenVerifiedOrRefreshIfNeeded()
 
       if (!accessToken) {

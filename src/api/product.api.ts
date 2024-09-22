@@ -40,7 +40,6 @@ export class ProductApi extends AbstractApi<Product> {
   }
 
   async update(id: string, product: UpdateProduct): Promise<ApiResponse<Product>> {
-    console.log('product', product) 
     const response = (await this.doFetch({
       requestOptions: {
         method: 'PUT',
@@ -48,7 +47,6 @@ export class ProductApi extends AbstractApi<Product> {
       },
       pathExtension: id,
     })) as ApiResponse<Product>
-    console.log('response', response)
     return response
   }
 

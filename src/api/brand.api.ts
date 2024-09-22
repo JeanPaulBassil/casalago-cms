@@ -20,12 +20,13 @@ export class BrandApi extends AbstractApi<Brand> {
     return response
   }
 
-  async update(brand: UpdateBrand): Promise<ApiResponse<Brand>> {
+  async update(brand: UpdateBrand, brandId: string): Promise<ApiResponse<Brand>> {
     const response = this.doFetch({
       requestOptions: {
         method: 'PUT',
         body: JSON.stringify(brand),
       },
+      pathExtension: brandId,
     }) as Promise<ApiResponse<Brand>>
     return response
   }

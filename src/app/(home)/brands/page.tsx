@@ -3,7 +3,7 @@ import Widget from '@/app/_components/shared/Widget'
 import { useSidebarContext } from '@/app/contexts/SidebarContext'
 import { Button } from '@nextui-org/button'
 import { useDisclosure } from '@nextui-org/modal'
-import { Link, Plus, Search, Sidebar, Trash } from 'lucide-react'
+import { Link, Pencil, Plus, Search, Sidebar, Trash } from 'lucide-react'
 import React, { useState } from 'react'
 import {
   Input,
@@ -25,6 +25,7 @@ import AddBrandModal from './_components/AddBrandModal'
 import { BrandApi } from '@/api/brand.api'
 import { Brand } from '@/api/models/Brand'
 import { useToast } from '@/app/contexts/ToastContext'
+import EditBrandModal from './_components/EditBrandModal'
 
 const columns = [
   {
@@ -51,6 +52,13 @@ const page = () => {
     onOpen: onOpenCreateModal,
     onClose: onCloseCreateModal,
   } = useDisclosure()
+
+  const {
+    isOpen: isOpenEditModal,
+    onOpen: onOpenEditModal,
+    onClose: onCloseEditModal,
+  } = useDisclosure()
+  const [brandBeingEdited, setBrandBeingEdited] = useState<Brand | null>(null)
 
   const brandApi = new BrandApi()
 
@@ -111,6 +119,12 @@ const page = () => {
         isOpen={isOpenCreateModal}
         onClose={onCloseCreateModal}
         queries={getQueries()}
+      />
+      <EditBrandModal
+        isOpen={isOpenEditModal}
+        onClose={onCloseEditModal}
+        queries={getQueries()}
+        brand={brandBeingEdited}
       />
       <Widget className="border-2 border-gray-200 px-4 py-2">
         <div className="flex items-center justify-between">
@@ -192,6 +206,16 @@ const page = () => {
                           variant="light"
                           size="sm"
                           startContent={<Link color="gray" size={16} />}
+                        />
+                        <Button
+                          onClick={() => {
+                            setBrandBeingEdited(item)
+                            onOpenEditModal()
+                          }}
+                          isIconOnly
+                          variant="light"
+                          size="sm"
+                          startContent={<Pencil color="gray" size={16} />}
                         />
                         <Button
                           onClick={() => onDeleteBrand(item.id)}

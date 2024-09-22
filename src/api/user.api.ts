@@ -22,7 +22,6 @@ export class UserApi extends AbstractApi<User> {
   }
 
   public async getUsers(params: ApiRequestParams): Promise<ApiResponse<User[]>> {
-    console.log('params', params)
     const response = (await this.doFetch({
       queries: params.queries,
       requestOptions: {
